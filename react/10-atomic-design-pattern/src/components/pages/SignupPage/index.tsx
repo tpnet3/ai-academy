@@ -1,21 +1,22 @@
+import { useAuth } from "../../../hooks/useAuth";
 import { useForm } from "../../../hooks/useForm";
 
 export function SignupPage() {
+  const { signup } = useAuth();
+
   const { data, handleChange, handleSubmit } = useForm({
     initialValues: {
       id: "",
       password: "",
       passwordConfirm: "",
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (values.password !== values.passwordConfirm) {
         alert("비밀번호가 일치하지 않습니다.");
         return true;
       }
 
-      const users = JSON.parse(localStorage.getItem("user") || "[]");
-      users.push({ id: values.id, password: values.password });
-      localStorage.setItem("user", JSON.stringify(users));
+      await signup(values.id, values.password);
 
       console.log(values);
     },

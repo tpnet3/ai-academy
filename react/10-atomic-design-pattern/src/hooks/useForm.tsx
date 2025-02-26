@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface FormProps<T> {
   initialValues: T;
-  onSubmit: (data: T) => boolean | void;
+  onSubmit: (data: T) => Promise<boolean | void> | boolean | void;
 }
 
 export function useForm<T extends object>({
@@ -19,9 +19,9 @@ export function useForm<T extends object>({
     setData(initialValues);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (onSubmit(data)) return;
+    if (await onSubmit(data)) return;
     reset();
   };
 

@@ -1,18 +1,16 @@
+import { useAuth } from "../../../hooks/useAuth";
 import { useForm } from "../../../hooks/useForm";
 
 export function LoginPage() {
+  const { login } = useAuth();
+
   const { data, handleChange, handleSubmit } = useForm({
     initialValues: {
       id: "",
       password: "",
     },
-    onSubmit: (values) => {
-      const users = JSON.parse(localStorage.getItem("user") || "[]");
-
-      const user = users.find(
-        (user: { id: string; password: string }) =>
-          user.id === values.id && user.password === values.password
-      );
+    onSubmit: async (values) => {
+      const user = await login(values.id, values.password);
 
       if (!user) {
         alert("로그인 실패");
