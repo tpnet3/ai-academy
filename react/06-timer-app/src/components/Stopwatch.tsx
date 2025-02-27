@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { TimeDisplay } from './TimeDisplay';
-import { StopwatchControls } from './StopwatchControls';
-import { LapTimes } from './LapTimes';
-import { StopwatchState } from './types';
-import './styles.css';
+import React, { useState, useEffect, useCallback } from "react";
+import { TimeDisplay } from "./TimeDisplay";
+import { StopwatchControls } from "./StopwatchControls";
+import { LapTimes } from "./LapTimes";
+import { StopwatchState } from "./types";
+import "./styles.css";
 
 export const Stopwatch: React.FC = () => {
   const [state, setState] = useState<StopwatchState>({
-    minutes: '00',
-    seconds: '00',
-    milliseconds: '00',
+    minutes: "00",
+    seconds: "00",
+    milliseconds: "00",
     isRunning: false,
     laps: [],
   });
@@ -25,21 +25,21 @@ export const Stopwatch: React.FC = () => {
         if (newSeconds === 60) {
           return {
             ...prev,
-            minutes: String(m + 1).padStart(2, '0'),
-            seconds: '00',
-            milliseconds: '00',
+            minutes: String(m + 1).padStart(2, "0"),
+            seconds: "00",
+            milliseconds: "00",
           };
         }
         return {
           ...prev,
-          seconds: String(newSeconds).padStart(2, '0'),
-          milliseconds: '00',
+          seconds: String(newSeconds).padStart(2, "0"),
+          milliseconds: "00",
         };
       }
 
       return {
         ...prev,
-        milliseconds: String(ms).padStart(2, '0'),
+        milliseconds: String(ms).padStart(2, "0"),
       };
     });
   }, []);
@@ -62,9 +62,9 @@ export const Stopwatch: React.FC = () => {
 
   const handleReset = () => {
     setState({
-      minutes: '00',
-      seconds: '00',
-      milliseconds: '00',
+      minutes: "00",
+      seconds: "00",
+      milliseconds: "00",
       isRunning: false,
       laps: [],
     });
